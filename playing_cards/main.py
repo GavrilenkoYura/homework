@@ -10,9 +10,6 @@ class Card:
         else:
             self.weight = weight or value
 
-    def __add__(self, other):
-        return self.weight + other.weight
-
     def __repr__(self):
         suits = {
             'Hearts': '♥',
@@ -24,7 +21,11 @@ class Card:
                 f"         |\n|{suits[self.suit]} {str(self.value).rjust(7)}|\n __________\n")
 
 
-one_card = Card('Hearts', 'A')
+def add_cards(card1, card2):
+    return card1.weight + card2.weight
+
+
+first_card = Card('Hearts', 'A', 11)
 second_card = Card('Spades', 9)
-print(one_card + second_card)
-print(one_card)
+result = add_cards(first_card, second_card)
+print(result)
