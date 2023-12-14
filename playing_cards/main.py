@@ -5,5 +5,10 @@ class Card:
         self.number = number
         self.weight = weight or number
 
+    def __add__(self, other):
+        return self.weight + other.weight
+
 
 one_card = Card('Bubna', 6)
+second_card = Card('Chervi', 9)
+print(one_card + second_card)
