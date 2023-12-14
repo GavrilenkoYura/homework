@@ -3,7 +3,7 @@ from random import choice
 
 class Card:
 
-    def __init__(self, suit, value, weight=None):
+    def __init__(self, suit: str, value, weight=None):
         self.suit = suit
         self.value = value
         if value in ['J', 'Q', 'K']:
@@ -24,11 +24,11 @@ class Card:
                 f"         |\n|{suits[self.suit]} {str(self.value).rjust(7)}|\n _________ \n")
 
 
-def add_cards(card1, card2):
+def add_cards(card1: Card, card2: Card) -> int:
     return card1.weight + card2.weight
 
 
-def create_deck():
+def create_deck() -> list:
     suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
     values = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
     deck = []
