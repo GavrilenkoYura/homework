@@ -24,7 +24,7 @@ class Card:
                 f"         |\n|{suits[self.suit]} {str(self.value).rjust(7)}|\n _________ \n")
 
     @staticmethod
-    def add_cards(card1, card2) -> int:
+    def add_values(card1, card2) -> int:
         return card1.weight + card2.weight
 
     @staticmethod
@@ -44,7 +44,7 @@ class Card:
 
 first_card = Card('Hearts', 'A', 11)
 second_card = Card('Spades', 9)
-result = Card.add_cards(first_card, second_card)
+result = Card.add_values(first_card, second_card)
 print(result)
 
 first_deck = Card.create_deck()
