@@ -4,6 +4,9 @@ from random import choice
 class Card:
 
     def __init__(self, suit: str, value, weight=None):
+        suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
+        if suit not in suits:
+            raise ValueError("Invalid suit. It should be one of 'Hearts', 'Diamonds', 'Clubs', 'Spades'")
         self.suit = suit
         self.value = value
         if value in ['J', 'Q', 'K']:
@@ -24,12 +27,12 @@ class Card:
                 f"         |\n|{suits[self.suit]} {str(self.value).rjust(7)}|\n _________ \n")
 
     @staticmethod
-    def create_deck() -> list:
+    def create_deck(num_cards=36) -> list:
         suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
         values = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
         deck = []
 
-        for _ in range(6):
+        for _ in range(num_cards):
             suit = choice(suits)
             value = choice(values)
             card = Card(suit, value)
@@ -46,18 +49,19 @@ class Card:
         deck.remove(card)
 
     @staticmethod
-    def shuffle_deck():
+    def replace_deck():
         new_deck = Card.create_deck()
         return new_deck
 
     @staticmethod
     def user_interaction():
-        deck = Card.create_deck()
+        num_cards = int(input('Enter number of cards in the deck: '))
+        deck = Card.create_deck(num_cards)
         print('Your deck:')
         print(*deck, sep='')
 
         while True:
-            print('What would you like to do (sum/remove/shuffle/stop)')
+            print('What would you like to do (sum/remove/replace/stop)')
             action = input().lower()
 
             match action:
@@ -66,10 +70,13 @@ class Card:
                 case 'remove':
                     print(f'Choose a card (enter a number from 1 to {len(deck)}: ')
                     card_index = int(input())
+                    if card_index < 1 or card_index > len(deck):
+                        print("Invalid card index. Try again.")
+                        continue
                     card = deck[card_index - 1]
                     Card.remove_card(deck, card)
                 case 'shuffle':
-                    deck = Card.shuffle_deck()
+                    deck = Card.replace_deck()
                 case 'stop':
                     print('bye bye!')
                     break
