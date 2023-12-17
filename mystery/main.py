@@ -13,11 +13,14 @@ class Mystery:
         print(f'Question: {self.question}')
         shuffle(self.choices)
         for i, choice in enumerate(self.choices):
-            print(f'{i+1}. {choice}')
-        user_input = int(input('Select option: '))
-        if self.choices[user_input-1] == self.answer:
-            return True
-        return False
+            print(f'{i + 1}. {choice}')
+        user_input = input('Select option(you can skip if you write any symbol(not digit): ')
+        if user_input.isdigit() and int(user_input) < len(self.choices):
+            if self.choices[int(user_input) - 1] == self.answer:
+                return 3
+            return -3
+        else:
+            return 0
 
 
 q1 = Mystery(question="Откуда на Беларусь готовилось нападение?",
