@@ -24,10 +24,6 @@ class Card:
                 f"         |\n|{suits[self.suit]} {str(self.value).rjust(7)}|\n _________ \n")
 
     @staticmethod
-    def add_values(card1, card2) -> int:
-        return card1.weight + card2.weight
-
-    @staticmethod
     def create_deck() -> list:
         suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades']
         values = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
@@ -41,11 +37,50 @@ class Card:
 
         return deck
 
+    @staticmethod
+    def sum_values(deck) -> int:
+        return sum(card.weight for card in deck)
+
+    @staticmethod
+    def remove_card(deck, card):
+        deck.remove(card)
+
+    @staticmethod
+    def shuffle_deck():
+        new_deck = Card.create_deck()
+        return new_deck
+
+    @staticmethod
+    def user_interaction():
+        deck = Card.create_deck()
+        print('Your deck:')
+        print(*deck, sep='')
+
+        while True:
+            print('What would you like to do (sum/remove/shuffle/stop)')
+            action = input().lower()
+
+            match action:
+                case 'sum':
+                    print(f'The sum of the weights is: {Card.sum_values(deck)}')
+                case 'remove':
+                    print(f'Choose a card (enter a number from 1 to {len(deck)}: ')
+                    card_index = int(input())
+                    card = deck[card_index - 1]
+                    Card.remove_card(deck, card)
+                case 'shuffle':
+                    deck = Card.shuffle_deck()
+                case 'stop':
+                    print('bye bye!')
+                    break
+                case _:
+                    print('Invalid action. Try again.')
+
+            print('Your deck:')
+            print(*deck, sep='')
+
 
 first_card = Card('Hearts', 'A', 11)
 second_card = Card('Spades', 9)
-result = Card.add_values(first_card, second_card)
-print(result)
 
-first_deck = Card.create_deck()
-print(*first_deck, sep='')
+Card.user_interaction()
