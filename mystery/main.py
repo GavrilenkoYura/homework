@@ -76,8 +76,8 @@ questions = [
 
 shuffle(questions)
 score = 0
-for question in questions:
-    score += question.quiz()
+for q in questions:
+    score += q.quiz()
     print('\n————————————————————————————————————————————————————————————————\n')
 
-print(f"Your score is: {score}. You could have gotten {len(question) * 3} points")
+print(f"Your score is: {score}. You could have gotten {len(questions) * 3} points")
